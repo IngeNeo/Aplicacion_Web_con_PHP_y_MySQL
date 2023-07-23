@@ -6,7 +6,4 @@
 *TODO: Ejecutar las sentencias
 *@param create
 */
-/**
-** Creación base de datos
-CREATE DATABASE [IF NOT EXISTS] NOMBRE_BASE_DATOS
-*/
+CREATE DATABASE [IF NOT EXISTS] NOMBRE_BASE_DATOS --Creación de una base de datos
