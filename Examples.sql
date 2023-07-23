@@ -51,3 +51,21 @@ VALUES('Yolanda', 52, 'yoly@gmail.com');
 INSERT INTO
   user (name, edad, email)
 VALUES('Hernan', 55, 'hernan@gmail.com');
+SELECT
+  *
+FROM
+  user;
+SELECT
+  *
+FROM
+  user
+LIMIT
+  1;
+-- Limita la consulta a 1 solo resultado
+SELECT
+  *
+FROM
+  user
+WHERE
+  edad > 15;
+-- la consulta debe cumplir el criterio que la edad sea mayor a 15 años
