@@ -184,3 +184,98 @@ SELECT
 FROM
   user;
 -- Podemos "renombrar" como deseamos que se vea el nombre del campo el la salida de la consulta en este caso en Nombre
+  CREATE Table products(
+    id int not null AUTO_INCREMENT,
+    name VARCHAR(50) not null,
+    created_by int not null,
+    marca VARCHAR(50) not null,
+    PRIMARY KEY (id),
+    FOREIGN KEY(created_by) REFERENCES user(id)
+  );
+RENAME TABLE products to product;
+-- Renombra la tabla products a product en singular
+INSERT INTO
+  product (NAME, created_by, marca)
+VALUES
+  ('ipad', 1, 'apple'),
+  ('iphone', 1, 'apple'),
+  ('watch', 2, 'apple'),
+  ('macbook', 1, 'apple'),
+  ('imac', 3, 'apple'),
+  ('ipad mini', 2, 'apple');
+-- Podemos insertar varios elementos en una sola sentencia de esta forma
+SELECT
+  *
+FROM
+  product;
+--LEFT JOIN
+SELECT
+  U.id,
+  U.email,
+  P.name
+FROM
+  user U
+  LEFT JOIN product P ON U.id = P.created_by;
+-- Este es el uso del left join, el cual consiste en la unión de 2 tablas, trayendo la información de la tabla user con los productos creados por dicho usuario si no tiene productos lo deja vacio.
+  --RIGHT JOIN
+SELECT
+  U.id,
+  U.email,
+  P.name
+FROM
+  user U
+  RIGHT JOIN product P ON U.id = P.created_by;
+-- Este es el uso del right join, el cual consiste en la unión de 2 tablas, trayendo la información de la tabla productos con los usuarios que los crearon si no tiene productos asociados no muestra al user.
+  --INNER JOIN
+SELECT
+  U.id,
+  U.email,
+  P.name
+FROM
+  user U
+  INNER JOIN product P ON U.id = P.created_by;
+-- Este es el uso del inner join, el cual consiste en la unión de 2 tablas, trayendo la información de la tabla productos y de user solo si coinciden en ambas tablas.
+  -- GROUP BY
+SELECT
+  COUNT(id),
+  marca
+FROM
+  product
+GROUP BY
+  marca;
+-- Nos agrupa el resultado basado en la marca y nos hace un conteo de registros
+  -- GROUP BY y LEFT JOIN
+SELECT
+  COUNT(p.id),
+  u.name
+FROM
+  product p
+  LEFT JOIN user u on u.id = p.created_by
+GROUP BY
+  p.created_by;
+-- Nos agrupa el resultado basado en la cantidad de productos creados por los usuarios en la tabla user
+  -- GROUP BY y LEFT JOIN
+SELECT
+  COUNT(p.id),
+  u.name
+FROM
+  product p
+  LEFT JOIN user u on u.id = p.created_by
+GROUP BY
+  p.created_by;
+-- Nos agrupa el resultado basado en la cantidad de productos creados por los usuarios en la tabla user
+  -- GROUP BY y HAVING
+SELECT
+  COUNT(p.id),
+  u.name
+FROM
+  product p
+  LEFT JOIN user u on u.id = p.created_by
+GROUP BY
+  p.created_by
+HAVING
+  COUNT(p.id) >= 2;
+-- Nos agrupa el resultado basado en la cantidad de productos creados por los usuarios en la tabla user y descarta cuando el conteo se menor a 2
+  -- DROP TABLE
+  DROP TABLE animales;
+-- Elimina la tabla y sus registros de la base de datos
