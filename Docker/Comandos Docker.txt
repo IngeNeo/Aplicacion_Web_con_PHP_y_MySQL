@@ -180,3 +180,30 @@ Example:
 C:\Users\IT> docker network rm mired
 mired
 
+//Crear contenedor asociándolo a la red nueva
+docker create -p[PUERTO_EQUIPO_ANFITRION]:[PUERTO_CONTENEDOR]--name[NAME_PERSONALIZE] --network [NAME_NETWORK] -e MONGO_INITDB_ROOT_USERNAME=inge  -e MONGO_INITDB_ROOT_PASSWORD=ingeneo [IMAGE_NAME]
+
+-e = Variable de entorno
+MONGO_INITDB_ROOT_USERNAME = Usuario de la base de datos en mongo para el proyecto
+MONGO_INITDB_ROOT_PASSWORD = Contraseña de la base de datos en mongo
+
+Example:
+
+
+//Crear contenedor con archivo Dockerfile
+docker build -t [NAME_APLICATION]:TAG .
+NAME_APLICATION= Nombre de la aplicacion a crear con el build
+TAG = Etiqueta
+
+Example:
+docker build -t miapp:1 .
+[+] Building 149.1s (8/8) FINISHED                                                     docker:default
+ => [internal] load build definition from Dockerfile                                             0.1s
+ => => transferring dockerfile: 140B                                                             0.0s
+ => [internal] load .dockerignore                                                                0.1s
+ => => transferring context: 2B
+
+ docker create -p27017:27017 --name monguito --network mired -e MONGO_INITDB_ROOT_USERNAME=inge -e MONGO_INITDB_ROOT_PASSWORD=ingeneo mongo
+
+docker create -p3000:3000 --name inge --network mired miapp:1
+8593908fd4599c3c385ecb1db7a426918cdddefd2c30a0b3172e138160319b32
