@@ -147,3 +147,36 @@ C:\Users\IT> docker ps -a
 CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS
         NAMES
 ab7cc1918f8d   mongo     "docker-entrypoint.s…"   19 seconds ago   Up 17 seconds   0.0.0.0:27017->27017/tcp   monguito
+
+//Listar la redes en Docker
+docker network ls
+
+Example:
+C:\Users\IT> docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+74718798f556   bridge    bridge    local
+492d3b3d8d86   host      host      local
+6c79983e3585   none      null      local
+
+//Crear redes o asociar contenedores en una red
+docker network create [NAME_NETWORK]
+NAME_NETWORK = Nombre que le queremos asignar a al red
+
+Example:
+C:\Users\IT> docker network create mired
+9efb9b7d48dc8ff550871b57896d79a4dd234969cbe7914ddedf21a2bacb685e
+
+C:\Users\IT> docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+74718798f556   bridge    bridge    local
+492d3b3d8d86   host      host      local
+9efb9b7d48dc   mired     bridge    local
+6c79983e3585   none      null      local
+
+//Eliminar una red
+docker network rm [NAME_NETWORK]
+
+Example:
+C:\Users\IT> docker network rm mired
+mired
+
