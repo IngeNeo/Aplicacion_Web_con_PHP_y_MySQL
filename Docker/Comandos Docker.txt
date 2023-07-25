@@ -11,17 +11,18 @@ Una vez instalado se debe mantener en ejecución y en la terminal podemos usar e
 
 Abrimos la terminal y podremos usar los siguientes Comandos:
 
+//Listar Imágenes en el equipo:
 docker images --> Nos permite listar las imágenes o contenedores creados en nuestro equipo
+
+//Descargar imagen al equipo:
 docker pull [IMAGE]:VERSION --> Nos permite descargar la imagen que deseamos instalar * IMAGE=Nombre de la Imagen o aplicación VERSION=Podemos escoger la version que deseamos descargar
 
 Example:
-
 docker pull NodeJS	--> Descarga la ultima versión disponible de NodeJS
 docker pull node:18 --> Descarga la versión 18 de NodeJS
 
 
 Other Example:
-
 docker pull mysql  --> Descarga la ultima versión de MySQL
 
 Luego de estos comando nos debería poder mostrar con el comando "Docker images" algo asi:
@@ -31,7 +32,7 @@ mysql        latest    7c5ae0d3388c   19 hours ago   577MB
 node         latest    250e9c100ea2   4 days ago     1.1GB
 node         18        0f9df951673d   6 days ago     1.09GB
 
-
+//Eliminar imagen del equipo:
 docker image rm [IMAGE_NAME]:VERSION	--> Nos permite eliminar una imagen del equipo IMAGEN_NAME = imagen a eliminar
 VERSION = si tenemos mas de una y deseamos especificar la version a eliminar
 
@@ -39,20 +40,63 @@ Example:
 docker image rm node
 docker image rm node:18
 
-Crear Container:
-
+//Crear Container:
 docker create [NAME_IMAGE_SYSTEM] --> Nos permite crear un contenedor basado en la imagen que tenemos ya en el equipo
 NAME_IMAGE_SYSTEM = Nombre de la imagen ue tenemos en el equipo
 
 Example:
-
-docker create mysql
+docker container create MySQL
+docker create mysql --> Forma corta del comando anterior
 Esto nos entregara un numero que identifica al contenedor
 
 Example:
 C:\Users\IT> docker create mongo
 43945ce57d9db30305643ba7a95513fbd900c9161af9e461103626a73a7b69c6 = ID del contenedor
 
+//Iniciar el contenedor
+docker start [ID_CONTAINER]
+Nos regresa el mismo ID que acabamos de entregar
+
+Example:
+C:\Users\IT> docker start 43945ce57d9db30305643ba7a95513fbd900c9161af9e461103626a73a7b69c6
+43945ce57d9db30305643ba7a95513fbd900c9161af9e461103626a73a7b69c6
+C:\Users\IT>
+
+//Validar si esta ejecutándose el container:
+docker ps --> Nos muestra los contenedores que se están ejecutando actualmente
+docker ps -a --> Nos muestra los contenedores creados aunque no estén ejecutándose
+
+Example:
+C:\Users\IT> docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS       NAMES
+43945ce57d9d   mongo     "docker-entrypoint.s…"   7 minutes ago   Up 3 minutes   27017/tcp   epic_shirley
+
+C:\Users\IT> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
+43945ce57d9d   mongo     "docker-entrypoint.s…"   16 minutes ago   Exited (0) 2 minutes ago
+  epic_shirley
+C:\Users\IT>
+
+//Detener un contenedor
+docker stop [ID_CONTAINER]
+Nos regresa el mismo ID que acabamos de entregar
+
+Example:
+C:\Users\IT> docker stop 43945ce57d9d
+43945ce57d9d
+C:\Users\IT>
+
+//Crear un contenedor y asignarle el nombre personalizado
+docker create --name [NAME_PERSONALIZE] [NAME_IMAGE] 
+NAME_PERSONALIZE = Nombre que deseamos colocar al contenedor
+NAME_IMAGE = Nombre de la imagen en la que basamos el contenedor
+
+Example:
+C:\Users\IT> docker create --name monguito mongo
+c2c110534c50d8eb50a4f66e3500ba8204ea84418785d17ff4d1f87e46711d93
+C:\Users\IT>
+
+//Mapear punto del equipo hacia el container
 
 
 
