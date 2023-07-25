@@ -9,5 +9,51 @@ Una vez instalado se debe mantener en ejecución y en la terminal podemos usar e
 
  /// Comandos Docker ////
 
- 
+Abrimos la terminal y podremos usar los siguientes Comandos:
+
+docker images --> Nos permite listar las imágenes o contenedores creados en nuestro equipo
+docker pull [IMAGE]:VERSION --> Nos permite descargar la imagen que deseamos instalar * IMAGE=Nombre de la Imagen o aplicación VERSION=Podemos escoger la version que deseamos descargar
+
+Example:
+
+docker pull NodeJS	--> Descarga la ultima versión disponible de NodeJS
+docker pull node:18 --> Descarga la versión 18 de NodeJS
+
+
+Other Example:
+
+docker pull mysql  --> Descarga la ultima versión de MySQL
+
+Luego de estos comando nos debería poder mostrar con el comando "Docker images" algo asi:
+
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+mysql        latest    7c5ae0d3388c   19 hours ago   577MB
+node         latest    250e9c100ea2   4 days ago     1.1GB
+node         18        0f9df951673d   6 days ago     1.09GB
+
+
+docker image rm [IMAGE_NAME]:VERSION	--> Nos permite eliminar una imagen del equipo IMAGEN_NAME = imagen a eliminar
+VERSION = si tenemos mas de una y deseamos especificar la version a eliminar
+
+Example:
+docker image rm node
+docker image rm node:18
+
+Crear Container:
+
+docker create [NAME_IMAGE_SYSTEM] --> Nos permite crear un contenedor basado en la imagen que tenemos ya en el equipo
+NAME_IMAGE_SYSTEM = Nombre de la imagen ue tenemos en el equipo
+
+Example:
+
+docker create mysql
+Esto nos entregara un numero que identifica al contenedor
+
+Example:
+C:\Users\IT> docker create mongo
+43945ce57d9db30305643ba7a95513fbd900c9161af9e461103626a73a7b69c6 = ID del contenedor
+
+
+
+
 
