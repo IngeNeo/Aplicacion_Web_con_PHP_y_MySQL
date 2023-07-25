@@ -1,0 +1,209 @@
+Descargar Docker en el enlace:
+	https://www.docker.com/
+
+Para ver que imágenes existen se puede consultar en:
+	https://hub.docker.com/
+
+
+Una vez instalado se debe mantener en ejecución y en la terminal podemos usar estos comandos.
+
+ /// Comandos Docker ////
+
+Abrimos la terminal y podremos usar los siguientes Comandos:
+
+//Listar Imágenes en el equipo:
+docker images --> Nos permite listar las imágenes o contenedores creados en nuestro equipo
+
+//Descargar imagen al equipo:
+docker pull [IMAGE]:VERSION --> Nos permite descargar la imagen que deseamos instalar * IMAGE=Nombre de la Imagen o aplicación VERSION=Podemos escoger la version que deseamos descargar
+
+Example:
+docker pull NodeJS	--> Descarga la ultima versión disponible de NodeJS
+docker pull node:18 --> Descarga la versión 18 de NodeJS
+
+
+Other Example:
+docker pull mysql  --> Descarga la ultima versión de MySQL
+
+Luego de estos comando nos debería poder mostrar con el comando "Docker images" algo asi:
+
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+mysql        latest    7c5ae0d3388c   19 hours ago   577MB
+node         latest    250e9c100ea2   4 days ago     1.1GB
+node         18        0f9df951673d   6 days ago     1.09GB
+
+//Eliminar imagen del equipo:
+docker image rm [IMAGE_NAME]:VERSION	--> Nos permite eliminar una imagen del equipo IMAGEN_NAME = imagen a eliminar
+VERSION = si tenemos mas de una y deseamos especificar la version a eliminar
+
+Example:
+docker image rm node
+docker image rm node:18
+
+//Crear Container:
+docker create [NAME_IMAGE_SYSTEM] --> Nos permite crear un contenedor basado en la imagen que tenemos ya en el equipo
+NAME_IMAGE_SYSTEM = Nombre de la imagen ue tenemos en el equipo
+
+Example:
+docker container create MySQL
+docker create mysql --> Forma corta del comando anterior
+Esto nos entregara un numero que identifica al contenedor
+
+Example:
+C:\Users\IT> docker create mongo
+43945ce57d9db30305643ba7a95513fbd900c9161af9e461103626a73a7b69c6 = ID del contenedor
+
+//Iniciar el contenedor
+docker start [ID_CONTAINER]
+Nos regresa el mismo ID que acabamos de entregar
+
+Example:
+C:\Users\IT> docker start 43945ce57d9db30305643ba7a95513fbd900c9161af9e461103626a73a7b69c6
+43945ce57d9db30305643ba7a95513fbd900c9161af9e461103626a73a7b69c6
+C:\Users\IT>
+
+//Validar si esta ejecutándose el container:
+docker ps --> Nos muestra los contenedores que se están ejecutando actualmente
+docker ps -a --> Nos muestra los contenedores creados aunque no estén ejecutándose
+
+Example:
+C:\Users\IT> docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS       NAMES
+43945ce57d9d   mongo     "docker-entrypoint.s…"   7 minutes ago   Up 3 minutes   27017/tcp   epic_shirley
+
+C:\Users\IT> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
+43945ce57d9d   mongo     "docker-entrypoint.s…"   16 minutes ago   Exited (0) 2 minutes ago
+  epic_shirley
+C:\Users\IT>
+
+//Detener un contenedor
+docker stop [ID_CONTAINER]
+Nos regresa el mismo ID que acabamos de entregar
+
+Example:
+C:\Users\IT> docker stop 43945ce57d9d
+43945ce57d9d
+C:\Users\IT>
+
+//Crear un contenedor y asignarle el nombre personalizado
+docker create --name [NAME_PERSONALIZE] [NAME_IMAGE] 
+NAME_PERSONALIZE = Nombre que deseamos colocar al contenedor
+NAME_IMAGE = Nombre de la imagen en la que basamos el contenedor
+
+Example:
+C:\Users\IT> docker create --name monguito mongo
+c2c110534c50d8eb50a4f66e3500ba8204ea84418785d17ff4d1f87e46711d93
+C:\Users\IT>
+
+//Mapear punto del equipo hacia el container
+docker create -p[PUERTO_EQUIPO_ANFITRION]:[PUERTO_CONTENEDOR] --name [NAME_PERSONALIZE] [NAME_IMAGE] 
+
+Example:
+C:\Users\IT> docker create -p27017:27017 --name monguito mongo
+37bdf5a2ef7a01e2709b2de0912bfd15adc704245663f2ad9b44a954525acec0
+C:\Users\IT>
+
+//Revisar ejecución del contenedor
+docker logs [NAME_IMAGE]
+docker logs --follow [NAME_IMAGE]  --> Se queda escuchando los logs
+
+Example:
+C:\Users\IT> docker logs monguito
+{"t":{"$date":"2023-07-25T21:17:23.608+00:00"},"s":"I",  "c":"NETWORK",  "id":4915701, "ctx":"-","msg":"Initialized wire specification","attr":{"spec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":17},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":17},"outgoing":{"minWireVersion":6,"maxWireVersion":17},"isInternalClient":true}}}
+{"t":{"$date":"2023-07-25T21:17:23.610+00:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"-","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2023-07-25T21:17:23.612+00:00"},"s":"I",  "c":"NETWORK",  "id":4648601, "ctx":"main","msg":"Implicit TCP FastOpen unavailable. If TCP FastOpen is required, set tcpFastOpenServer, tcpFastOpenClient, and tcpFastOpenQueueSize."}
+{"t":{"$date":"2023-07-25T21:17:23.616+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationDonorService","namespace":"config.tenantMigrationDonors"}}
+{"t":{"$date":"2023-07-25T21:17:23.616+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationRecipientService","namespace":"config.tenantMigrationRecipients"}}
+{"t":{"$date":"2023-07-25T21:17:23.616+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"ShardSplitDonorService","namespace":"config.tenantSplitDonors"}} ....... etc
+
+C:\Users\IT> docker logs --follow monguito
+{"t":{"$date":"2023-07-25T21:17:23.608+00:00"},"s":"I",  "c":"NETWORK",  "id":4915701, "ctx":"-","msg":"Initialized wire specification","attr":{"spec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":17},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":17},"outgoing":{"minWireVersion":6,"maxWireVersion":17},"isInternalClient":true}}}
+{"t":{"$date":"2023-07-25T21:17:23.610+00:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"-","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2023-07-25T21:17:23.612+00:00"},"s":"I",  "c":"NETWORK",  "id":4648601, "ctx":"main","msg":"Implicit TCP FastOpen unavailable. If TCP FastOpen is required, set tcpFastOpenServer, tcpFastOpenClient, and tcpFastOpenQueueSize."}
+{"t":{"$date":"2023-07-25T21:17:23.616+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationDonorService","namespace":"config.tenantMigrationDonors"}}
+
+
+//Otro comando para crear contenedor y iniciarlo inmediatamente
+docker run --name [NAME_PERSONALIZE] -p[PUERTO_EQUIPO_ANFITRION]:[PUERTO_CONTENEDOR]  -d [IMAGE_NAME]
+
+Example:
+C:\Users\IT> docker run --name monguito -p27017:27017 -d mongo
+Unable to find image 'mongo:latest' locally
+latest: Pulling from library/mongo
+9d19ee268e0d: Pull complete
+84c1327991fa: Pull complete
+1feec59ecd14: Pull complete
+3af7480eaf55: Pull complete
+d7524ee16ced: Pull complete
+f4742175eefc: Pull complete
+9d688a8d9c18: Pull complete
+865b2fb03178: Pull complete
+f01ec0b7fbdb: Pull complete
+Digest: sha256:20f3adcaffe2193e49dd502c8299b770d49a1e0643e0e9db250d5c127b1e9ed8
+Status: Downloaded newer image for mongo:latest
+ab7cc1918f8d296d61a194342e29c48e84e7a5a890acc651f7ae3adfd47eed7d
+C:\Users\IT> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS
+        NAMES
+ab7cc1918f8d   mongo     "docker-entrypoint.s…"   19 seconds ago   Up 17 seconds   0.0.0.0:27017->27017/tcp   monguito
+
+//Listar la redes en Docker
+docker network ls
+
+Example:
+C:\Users\IT> docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+74718798f556   bridge    bridge    local
+492d3b3d8d86   host      host      local
+6c79983e3585   none      null      local
+
+//Crear redes o asociar contenedores en una red
+docker network create [NAME_NETWORK]
+NAME_NETWORK = Nombre que le queremos asignar a al red
+
+Example:
+C:\Users\IT> docker network create mired
+9efb9b7d48dc8ff550871b57896d79a4dd234969cbe7914ddedf21a2bacb685e
+
+C:\Users\IT> docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+74718798f556   bridge    bridge    local
+492d3b3d8d86   host      host      local
+9efb9b7d48dc   mired     bridge    local
+6c79983e3585   none      null      local
+
+//Eliminar una red
+docker network rm [NAME_NETWORK]
+
+Example:
+C:\Users\IT> docker network rm mired
+mired
+
+//Crear contenedor asociándolo a la red nueva
+docker create -p[PUERTO_EQUIPO_ANFITRION]:[PUERTO_CONTENEDOR]--name[NAME_PERSONALIZE] --network [NAME_NETWORK] -e MONGO_INITDB_ROOT_USERNAME=inge  -e MONGO_INITDB_ROOT_PASSWORD=ingeneo [IMAGE_NAME]
+
+-e = Variable de entorno
+MONGO_INITDB_ROOT_USERNAME = Usuario de la base de datos en mongo para el proyecto
+MONGO_INITDB_ROOT_PASSWORD = Contraseña de la base de datos en mongo
+
+Example:
+
+
+//Crear contenedor con archivo Dockerfile
+docker build -t [NAME_APLICATION]:TAG .
+NAME_APLICATION= Nombre de la aplicacion a crear con el build
+TAG = Etiqueta
+
+Example:
+docker build -t miapp:1 .
+[+] Building 149.1s (8/8) FINISHED                                                     docker:default
+ => [internal] load build definition from Dockerfile                                             0.1s
+ => => transferring dockerfile: 140B                                                             0.0s
+ => [internal] load .dockerignore                                                                0.1s
+ => => transferring context: 2B
+
+ docker create -p27017:27017 --name monguito --network mired -e MONGO_INITDB_ROOT_USERNAME=inge -e MONGO_INITDB_ROOT_PASSWORD=ingeneo mongo
+
+docker create -p3000:3000 --name inge --network mired miapp:1
+8593908fd4599c3c385ecb1db7a426918cdddefd2c30a0b3172e138160319b32
