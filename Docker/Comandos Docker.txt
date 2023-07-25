@@ -1,0 +1,13 @@
+Descargar Docker en el enlace:
+	https://www.docker.com/
+
+Para ver que imágenes existen se puede consultar en:
+	https://hub.docker.com/
+
+
+Una vez instalado se debe mantener en ejecución y en la terminal podemos usar estos comandos.
+
+ /// Comandos Docker ////
+
+ 
+
