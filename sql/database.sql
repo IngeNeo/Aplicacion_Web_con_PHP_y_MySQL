@@ -25,16 +25,16 @@ ALTER TABLE producto MODIFY DESCRIPCION VARCHAR(50) NOT NULL;
 ALTER TABLE producto MODIFY PRECIO DECIMAL(8,2) NOT NULL;
 ALTER TABLE producto MODIFY STOCK INT NOT NULL;
 
---* Implementando la tabla de distrito 
---! Validando la existencia de la tabla distrito y en caso de existir eliminarla
-DROP TABLE IF EXISTS distrito;
-CREATE TABLE distrito(
-	ID_DISTRITO CHAR(5) NOT NULL,
+--* Implementando la tabla de departamento 
+--! Validando la existencia de la tabla departamento y en caso de existir eliminarla
+DROP TABLE IF EXISTS departamento;
+CREATE TABLE departamento(
+	ID_DEPARTAMENTO CHAR(5) NOT NULL,
 	DESCRIPCION VARCHAR(50) NOT NULL
 );
 
 --? Agregando la llave primaria
-ALTER TABLE distrito ADD PRIMARY KEY(ID_DISTRITO);
+ALTER TABLE departamento ADD PRIMARY KEY(ID_DEPARTAMENTO);
 
 --* Implementando la tabla de cliente  
 --! Validando la existencia de la tabla cliente y en caso de existir eliminarla
@@ -45,15 +45,15 @@ CREATE TABLE cliente(
 	PATERNO VARCHAR(30) NOT NULL,
 	MATERNO VARCHAR(30) NOT NULL,
 	DIRECCION VARCHAR(40) NULL,
-	FONO CHAR(15) NULL,
+	CELULAR CHAR(15) NULL,
 	EMAIL VARCHAR(50) NULL,
-	ID_DISTRITO CHAR(5) NOT NULL
+	ID_DEPARTAMENTO CHAR(5) NOT NULL
 	);
 
 --? Agregando la llave primaria
 ALTER TABLE cliente ADD PRIMARY KEY(ID_CLIENTE);
 --? Agregando la llave foránea
-ALTER TABLE cliente ADD FOREIGN KEY(ID_DISTRITO) REFERENCES distrito(ID_DISTRITO);
+ALTER TABLE cliente ADD FOREIGN KEY(ID_DEPARTAMENTO) REFERENCES departamento(ID_DEPARTAMENTO);
 
 --* Implementando la tabla de boleta 
 --! Validando la existencia de la tabla boleta y en caso de existir eliminarla
