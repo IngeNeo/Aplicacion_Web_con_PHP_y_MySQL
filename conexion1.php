@@ -19,6 +19,10 @@
 		    die("La conexión fallo: " . mysqli_connect_error());
 		}
 		echo "La conexión fue exitosa!";
+		//$info = mysqli_get_client_info();
+		//$info = mysqli_get_client_version();
+		$info = mysqli_get_server_info($conn);
+		echo "$info";
 		mysqli_close($conn);
 	?>
 </body>
