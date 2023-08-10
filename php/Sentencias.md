@@ -28,3 +28,15 @@ $resultado = mysqli_query($variable_conexión, 'sentencia_mysql');
 
 - TODO: Example:
 $resultado = mysqli_query($conn, 'SELECT * FROM cliente');
+
+* Función que determine el total de registros devueltos por la función mysql1_query usando la sentencia SELECT
+- Sera de mucha importancia determinar el numero encontrados por la función mysqli_query, ya que desde aquí puede determinar exactamente cuántos registros vienen de la consulta o cuántos registros fueron afectados por la misma.
+$variable = mysqli_num_rows($variable_de_consulta);
+
+- $variable = Es el numero total de registros resultantes de una consulta.
+- $variable_de_consulta = Es aquella variable que ejecuta la función mysqli_query
+
+- TODO: Example:
+$resultado = mysqli_query($conn, 'SELECT * FROM cliente');
+$n_registros = mysqli_num_rows($resultado);
+
