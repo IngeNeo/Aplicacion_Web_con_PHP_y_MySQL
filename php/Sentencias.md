@@ -40,3 +40,7 @@ $variable = mysqli_num_rows($variable_de_consulta);
 $resultado = mysqli_query($conn, 'SELECT * FROM cliente');
 $n_registros = mysqli_num_rows($resultado);
 
+* Función que muestre los registros de una consulta mysqli_query en PHP
+- La ejecución de una consulta al servidor conlleva el manejo de registros de tamaño variable, es decir, podría devolver un juego de registros como también podría devolver un solo valor. En ambos casos, se necesita una función que se introduzca dentro de estos registros y los puede retornar, de forma que puedan ser visibles por el usuario
+
+mysqli_result($variable_consulta, )
