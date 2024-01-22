@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" href="../style/style.css">
 	<title>Listado</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
 
 		$conexion = mysqli_connect($servername, $usuario, $clave, $basedatos);
 		if(!$conexion)
-			die("currió un error al conectar la base de datos " . mysqli_connect_error());
+			die("Ocurrió un error al conectar la base de datos " . mysqli_connect_error());
 
 		$resultado = mysqli_query($conexion, "SELECT * FROM cliente");
 		$fila = mysqli_fetch_row($resultado);
@@ -58,7 +58,7 @@
 	?>
 </section>
 <footer>
-	<h4>Todos los derechos reservados IngeCorp @2023</h4>
+	<h4>Todos los derechos reservados IngeCorp @2024</h4>
 </footer>
 </body>
 </html>
